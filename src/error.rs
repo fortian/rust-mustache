@@ -1,5 +1,5 @@
-use std::fmt;
-use std::io::Error as StdIoError;
+use std::fmt::{Display, Formatter, Result as FmtResult};
+use std::io::Error as IoError;
 use std::result::Result as StdResult;
 use std::error::Error as StdError;
 
@@ -16,15 +16,15 @@ pub enum Error {
     InvalidStr,
     NoFilename,
     IncompleteSection,
-    Io(StdIoError),
+    Io(IoError),
     Parser(parser::Error),
     Encoder(encoder::Error),
 }
 
 pub type Result<T> = StdResult<T, Error>;
 
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+impl Display for Error {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
         write!(f, "{}", match *self {
             Error::InvalidStr => "invalid str".to_string(),
             Error::NoFilename => "a filename must be provided".to_string(),
@@ -36,8 +36,8 @@ impl fmt::Display for Error {
     }
 }
 
-impl From<StdIoError> for Error {
-    fn from(err: StdIoError) -> Error {
+impl From<IoError> for Error {
+    fn from(err: IoError) -> Error {
         Error::Io(err)
     }
 }
