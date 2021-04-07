@@ -6,7 +6,7 @@ extern crate serde;
 
 use std::str;
 use std::path::{PathBuf, Path};
-use std::result;
+use std::result::Result as StdResult;
 
 #[macro_use]
 mod macros;
@@ -26,11 +26,11 @@ pub use data::Data;
 pub use encoder::Encoder;
 pub use encoder::Error as EncoderError;
 pub use encoder::{SerializeVec, SerializeTupleVariant, SerializeMap, SerializeStructVariant};
-pub use error::{Error, Result};
+pub use error::{Error as Error, Result};
 pub use parser::Error as ParserError;
 pub use template::Template;
 
-pub fn to_data<T>(value: T) -> result::Result<Data, encoder::Error>
+pub fn to_data<T>(value: T) -> StdResult<Data, EncoderError>
 where
     T: serde::Serialize,
 {
