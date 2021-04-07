@@ -26,7 +26,7 @@ pub use data::Data;
 pub use encoder::Encoder;
 pub use encoder::Error as EncoderError;
 pub use encoder::{SerializeVec, SerializeTupleVariant, SerializeMap, SerializeStructVariant};
-pub use error::{Error as Error, Result};
+pub use error::{Error, Result};
 pub use parser::Error as ParserError;
 pub use template::Template;
 
