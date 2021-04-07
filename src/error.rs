@@ -19,6 +19,7 @@ pub enum Error {
     Io(IoError),
     Parser(parser::Error),
     Encoder(encoder::Error),
+    Std(&'static dyn StdError),
 }
 
 pub type Result<T> = StdResult<T, Error>;
@@ -32,6 +33,7 @@ impl Display for Error {
             Error::Io(ref err) => err.to_string(),
             Error::Parser(ref err) => err.to_string(),
             Error::Encoder(ref err) => err.to_string(),
+            Error::Std(ref err) => err.to_string(),
         })
     }
 }
@@ -51,6 +53,12 @@ impl From<parser::Error> for Error {
 impl From<encoder::Error> for Error {
     fn from(err: encoder::Error) -> Error {
         Error::Encoder(err)
+    }
+}
+
+impl From<&'static dyn StdError> for Error {
+    fn from(err: &'static dyn StdError) -> Error {
+        Error::Std(err)
     }
 }
 
