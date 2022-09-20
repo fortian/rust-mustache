@@ -5,7 +5,7 @@ use std::str;
 
 use compiler::Compiler;
 // for bug!
-use log::{log, error};
+use log::error;
 use parser::Token;
 use serde::Serialize;
 
@@ -23,9 +23,9 @@ pub struct Template {
 /// not exported outside of mustache.
 pub fn new(ctx: Context, tokens: Vec<Token>, partials: HashMap<String, Vec<Token>>) -> Template {
     Template {
-        ctx: ctx,
-        tokens: tokens,
-        partials: partials,
+        ctx,
+        tokens,
+        partials,
     }
 }
 
@@ -71,7 +71,7 @@ struct RenderContext<'a> {
 impl<'a> RenderContext<'a> {
     fn new(template: &'a Template) -> RenderContext<'a> {
         RenderContext {
-            template: template,
+            template,
             indent: "".to_string(),
             line_start: true,
         }

@@ -3,7 +3,7 @@ use std::mem;
 use std::fmt;
 
 // for bug!
-use log::{log, error};
+use log::error;
 
 /// `Token` is a section of a compiled mustache string.
 #[derive(Clone, Debug, PartialEq)]
@@ -88,7 +88,7 @@ enum ParserState {
 impl<'a, T: Iterator<Item = char>> Parser<'a, T> {
     pub fn new(reader: &'a mut T, opening_tag: &str, closing_tag: &str) -> Parser<'a, T> {
         let mut parser = Parser {
-            reader: reader,
+            reader,
             ch: None,
             lookahead: None,
             line: 1,

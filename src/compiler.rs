@@ -23,8 +23,8 @@ impl<T: Iterator<Item = char>> Compiler<T> {
     /// Construct a default compiler.
     pub fn new(ctx: Context, reader: T) -> Compiler<T> {
         Compiler {
-            ctx: ctx,
-            reader: reader,
+            ctx,
+            reader,
             partials: HashMap::new(),
             otag: "{{".to_string(),
             ctag: "}}".to_string(),
@@ -39,11 +39,11 @@ impl<T: Iterator<Item = char>> Compiler<T> {
                     ctag: String)
                     -> Compiler<T> {
         Compiler {
-            ctx: ctx,
-            reader: reader,
-            partials: partials,
-            otag: otag,
-            ctag: ctag,
+            ctx,
+            reader,
+            partials,
+            otag,
+            ctag,
         }
     }
 
